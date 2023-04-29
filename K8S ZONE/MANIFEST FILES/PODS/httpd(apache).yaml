@@ -1,0 +1,43 @@
+## WHENEVER IN KUBERNETES(K8S-SHORT FORM FOR KUBERNETES),WE HAVE TO WRITE FOUR MAJOR SECTIONS.
+        ` apiVersion:
+          kind:
+          metadata:
+          spec: `
+## WE HAVE TO WRITE THE "apiVersion" in the form of "<GROUPNAME>/<VERSION>". IF THE GROUP NAME IS "core", WE HAVE TO WRITE JUST ONLY "<VERSION>". ##
+       # TO KNOW THE API VERSION,WHAT IS THE GROUP IT BELONGS,WHAT IS THE VERSION IT BELONGS TO #
+## WE HAVE TO TELL THAT,WHAT IS THE KIND OF RESOURCE WE WANT TO CREATE ##
+## "metadata" MEANS WHERE WE HAVE GIVE SOMEINFORMATION ABOUT THE NAMES OF RESOURCES (FOR EXAMPLE: mysql,sql-db)
+## "spec" IS OUR DESIRED STATE.
+## IN METADATA,WE ARITE ABT NAME IS PODS NAME ##
+
+--> TO CREATE THE, WE HAVE TO USE.
+          * "vi filename.yaml"
+          *  kubectl apply -f filename.yaml
+                 * IN APPLY, WE CAN PASS THE MANIFEST FILE. TO PASS THE MANIFEST FILE WE GIVEING "-f" AND PATH OF THE FILE.
+--> TO SEE THE PODS, WHICH WE CREATED.
+          * kubectl get po or pods ("po" IS SHORT NAME FOR POD)
+--> TO SEE THE NODES, WHICH ARE PRESENT IN MASTER
+          * kubectl get nodes.
+--> HOW TO SEE OUR FILE IS RUNNING ON WHICH NODE?
+          * kubectl get pods -o wide (FOR MORE INFORMATION)
+--> TO SEE THE DETAILED INFORMATION, ABOUT THE POD
+          * kubectl describe Pods "podname"
+--> TO SEE THE COMPLETE MANIFEST FILE,CREATED BY K8S
+          * kubectl get <kind> <name> -o yaml
+--> FOR DELETING THE PODS.
+          * kubectl delete -f "filename.yaml"
+
+
+
+--- 
+apiVersion: v1                  ##WE HAVE TO GIVE THE VERSION,GROUP WHICH IT BELONGS TO.IF THE GROUP NAME IS "core", WE HAVE TO WRITE JUST ONLY "<VERSION>". ##
+kind: Pod                       ## WE HAVE TO TELL THAT,WHICH KIND OF RESOURCE, WE WANT TO CREATE ##
+metadata:                       ## METADATA IS OBJECT, GO TO THE NEXT LINE AND GIVE TWO SPACES ##
+  name: httpd-pod               
+spec:                           ## "spec" IS OUR DESIRED STATE. ##
+  containers:                   ## "container" IS AN ARRAY. THEN GO TO NEXT LINE AND GIVE TWO SPACES.START WITH "-"(HYPHON).
+    - name: apachecontainer
+      image: httpd:2
+      ports:                    ## "ports"  IS AN ARRAY. THEN GO TO NEXT LINE AND GIVE TWO SPACES.START WITH "-"(HYPHON).
+        - containerPort: 80
+          
